@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     public float cameraDistanceZ = 5f;
 
     //flag to keep track of key pressing
-    bool pressedJump = false;
+    private bool pressedJump = false;
 
     // Use this for initialization
     void Start () {
@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour {
 
         //set the camera to player position
         CameraFollowPlayer();
-        
     }
 
     // Update is called once per frame
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour {
         WalkHandler();
         JumpHandler();
         CameraFollowPlayer();
-
     }
 
     void WalkHandler() {
@@ -56,9 +54,6 @@ public class PlayerController : MonoBehaviour {
             //gain direction
             Vector3 direction = new Vector3(hAxis, 0, vAxis);
 
-            //can apply direction to transform -> if using regidbody for kinematic objects
-            //transform.forward = direction;
-
             //can apply direct to rigidbody component in object
             rb.rotation = Quaternion.LookRotation(direction);
         }
@@ -70,31 +65,26 @@ public class PlayerController : MonoBehaviour {
         if (jAxis > 0)
         {
             bool isGrounded = CheckGrounded();
+
             //if we alredy jumping?
             if (!pressedJump && isGrounded)
             {
-                //print("! ! ! ! GROUNDED ! ! ! !");
                 pressedJump = true;
                 Vector3 jumpVector = new Vector3(0, jAxis * jumpForce, 0);
                 rb.AddForce(jumpVector, ForceMode.VelocityChange);
             }
         }
         else
-        {
             pressedJump = false;
-        }
     }
 
     bool CheckGrounded()
     {
-        //print("Grounded?");
         //found 4 corners
         Vector3 corner1 = transform.position + new Vector3(playerSize.x / 2, -playerSize.y / 2 + 0.01f, playerSize.z / 2);
         Vector3 corner2 = transform.position + new Vector3(-playerSize.x / 2, -playerSize.y / 2 + 0.01f, playerSize.z / 2);
         Vector3 corner3 = transform.position + new Vector3(playerSize.x / 2, -playerSize.y / 2 + 0.01f, -playerSize.z / 2);
         Vector3 corner4 = transform.position + new Vector3(-playerSize.x / 2, -playerSize.y / 2 + 0.01f, -playerSize.z / 2);
-
-        //print(corner1 + "\n" + corner2 + "\n" + corner3 + "\n" + corner4);
 
         bool grounded1 = Physics.Raycast(corner1, -Vector3.up, 0.02f);
         bool grounded2 = Physics.Raycast(corner2, -Vector3.up, 0.02f);
@@ -111,8 +101,8 @@ public class PlayerController : MonoBehaviour {
         {
             coinSound.Play();
             GameManager.instance.IncreaseScore(1);
+
             //play sound and destroy
-            //print(coinSound.isActiveAndEnabled);
             Destroy(other.gameObject);
         }
         //Game Over if player running into enemy or fall off

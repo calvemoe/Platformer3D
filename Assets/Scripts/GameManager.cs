@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public int currentLevel = 1;
 
     //how many levels in the game
-    public int highestLevel = 2;
+    public int highestLevel = 4;
 
     //HUD manager
     HUDManager hudManager;
@@ -24,10 +24,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
-
+ 
         else if (instance != this)
         {
             instance.hudManager = FindObjectOfType<HUDManager>();
@@ -48,13 +46,10 @@ public class GameManager : MonoBehaviour
         if (hudManager != null)
             hudManager.ResetHud();
         else
-            print("no hud manager!");
-        print("After REsetHud. Score should be: " + score);
+            print("GameManager.IncreaseScore: no hud manager!");
 
         if (score > highScore)
-        {
             highScore = score;
-        }
     }
 
     //Game Reset
@@ -64,7 +59,8 @@ public class GameManager : MonoBehaviour
         if (hudManager != null)
             hudManager.ResetHud();
         else
-            print("no hud manager!");
+            print("GameManager.ResetGame: no hud manager!");
+
         currentLevel = 1;
 
         //load Level1 Scene
@@ -75,9 +71,7 @@ public class GameManager : MonoBehaviour
     {
         //if there level further
         if (currentLevel < highestLevel)
-        {
             currentLevel++;
-        }
         else
         {
             //if not - looping the game

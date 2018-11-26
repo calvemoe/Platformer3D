@@ -17,7 +17,6 @@ public class GameOverUIManager : MonoBehaviour {
 	
 	public void RestartGame()
     {
-        print("restartGAme");
         GameManager.instance.ResetGame();
         SceneManager.LoadScene("Level1");
     }

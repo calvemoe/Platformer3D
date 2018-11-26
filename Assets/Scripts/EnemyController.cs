@@ -33,12 +33,8 @@ public class EnemyController : MonoBehaviour {
         float newY = transform.position.y + movementY;
 
         if (Mathf.Abs(newY - initialPosition.y) > rangeY || newY < initialPosition.y)
-        {
             direction *= -1;
-        }
         else
-        {
             transform.position += new Vector3(0, movementY, 0);
-        }
 	}
 }
