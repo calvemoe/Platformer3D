@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class HomeUIManager : MonoBehaviour
 {
     //start level 1
-    public void StartGame()
-    {
+    public void StartGame() {
         SceneManager.LoadScene("Level1");
     }
 }

@@ -11,12 +11,11 @@ public class GameOverUIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        scoreValue.text = GameManager.instance.score.ToString();
-        highScoreValue.text = GameManager.instance.highScore.ToString();
+        scoreValue.text = GameManager.instance.GetScore();
+        highScoreValue.text = GameManager.instance.GetHighScore();
 	}
 	
-	public void RestartGame()
-    {
+	public void RestartGame() {
         GameManager.instance.ResetGame();
         SceneManager.LoadScene("Level1");
     }

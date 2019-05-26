@@ -12,8 +12,7 @@ public class HUDManager : MonoBehaviour {
         ResetHud();
 	}
 
-    public void ResetHud()
-    {
-        scoreLabel.text = "Score " + GameManager.instance.score;
+    public void ResetHud() {
+        scoreLabel.text = GameManager.instance.GetScore();
     }
 }
