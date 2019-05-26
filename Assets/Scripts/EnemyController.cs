@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-    Vector3 initialPosition;
+    private Vector3 initialPosition;
 
     //movement direction: 1 - down, -1 - up
-    int direction = 1;
+    private int direction = 1;
 
     //range of movement by Y
-    public float rangeY = 4f;
+    [SerializeField]
+    private float rangeY = 4f;
 
     //enemy movement speed
-    public float speed = 3f;
-    public float speedDownMultiplier = 1.2f;
+    [SerializeField]
+    private float speed = 3f;
+    [SerializeField]
+    private float speedDownMultiplier = 1.2f;
 
 	// Use this for initialization
 	void Start () {

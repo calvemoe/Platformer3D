@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CoinContoller : MonoBehaviour {
 
-    public float rotationSpeed = 100;
+    [SerializeField]
+    private float rotationSpeed = 100;
 	
 	// Update is called once per frame
 	void Update () {
