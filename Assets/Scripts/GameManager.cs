@@ -5,29 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
-    public int score = 0;
-
-    public int highScore = 0;
+    //score variable for ui
+    private int score = 0;
+    
+    //high score value for ui
+    private int highScore = 0;
 
     //current level
-    public int currentLevel = 1;
+    private int currentLevel = 1;
 
-    //how many levels in the game
-    public int highestLevel = 4;
+    //how many levels in the game. Hardcoded on this stage
+    private int highestLevel = 4;
 
     //HUD manager
     HUDManager hudManager;
 
-    public static GameManager instance;
+    public static GameManager instance {get; private set;}
 
-    void Awake()
-    {
+    void Awake() {
         if (instance == null)
             instance = this;
  
-        else if (instance != this)
-        {
+        else if (instance != this) {
             instance.hudManager = FindObjectOfType<HUDManager>();
             Destroy(gameObject);
         }
@@ -38,8 +37,7 @@ public class GameManager : MonoBehaviour
         hudManager = FindObjectOfType<HUDManager>();
     }
 
-    public void IncreaseScore(int amount)
-    {
+    public void IncreaseScore(int amount) {
         score += amount;
 
         //updating HUD
@@ -53,13 +51,12 @@ public class GameManager : MonoBehaviour
     }
 
     //Game Reset
-    public void ResetGame()
-    {
+    public void ResetGame() {
         score = 0;
         if (hudManager != null)
             hudManager.ResetHud();
         else
-            print("GameManager.ResetGame: no hud manager!");
+            Debug.Log("GameManager.ResetGame: no hud manager!");
 
         currentLevel = 1;
 
@@ -67,13 +64,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
-    public void IncreaseLevel()
-    {
+    public void IncreaseLevel() {
         //if there level further
         if (currentLevel < highestLevel)
             currentLevel++;
-        else
-        {
+        else {
             //if not - looping the game
             currentLevel = 1;
         }
@@ -81,9 +76,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level" + currentLevel);
     }
 
-    public void GameOver()
-    {
+    public void GameOver() {
         SceneManager.LoadScene("GameOver");
+    }
+
+    public string GetScore() {
+        return score.ToString();
+    }
+
+    public string GetHighScore() {
+        return highScore.ToString();
     }
 
 }
